@@ -5,8 +5,6 @@ import { weatherCodes } from "./constant";
 import HourlyForecast from "./components/HourlyForecast";
 
 function App() {
-  console.log(weatherCodes);
-
   const [currentWeather, setCurrentWeather] = useState({});
   const [hourlyForecasts, setHourlyForecasts] = useState([]);
   const searchRef = useRef(null);
@@ -19,7 +17,6 @@ function App() {
       const forecastTime = new Date(time).getTime();
       return forecastTime >= currentHour && forecastTime <= next24Hours;
     });
-    console.log(next24HoursData);
     setHourlyForecasts(next24HoursData);
   };
 
@@ -34,11 +31,9 @@ function App() {
       const codes = data.current.condition.code;
       const airQuality = data?.current?.air_quality?.pm10;
       const windSpeed = data?.current?.wind_kph;
-      console.log("display----", airQuality);
       const weatherIcon = Object.keys(weatherCodes).find((icon) =>
         weatherCodes[icon].includes(codes)
       );
-      console.log("result ====", weatherIcon);
       setCurrentWeather({
         temprature,
         description,
@@ -53,14 +48,12 @@ function App() {
       ];
       filterHourlyForecast(combinedHourData);
       searchRef.current.value = data.location.name;
-      console.log(searchRef.current.value);
-      console.log(combinedHourData);
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="bg-gradient-to-b from-blue-500 via-blue-400 to-blue-300 text-center p-4 text-white">
+    <div className="bg-gradient-to-b from-blue-500 via-blue-400 to-blue-300 text-center p-4 text-white h-screen overflow-auto">
       <h1 className="text-2xl font-bold">Weather App</h1>
       <div className="b bg-gradient-to-br from-[#352163] to-[#33143c] text-white p-8 rounded-lg shadow-lg max-w-md mx-auto overflow-hidden">
         <SearchSection getWeatherApi={getWeatherApi} searchRef={searchRef} />

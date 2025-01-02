@@ -1,8 +1,6 @@
 import React from "react";
 
 const DisplayWeather = ({ currentWeather }) => {
-  console.log("currentWeather=>", currentWeather);
-
   return (
     <div className="flex flex-col items-center  max-w-md mx-auto">
       <h2 className="text-6xl font-extrabold mb-4">

@@ -40,7 +40,9 @@ const SearchSection = ({ getWeatherApi, searchRef }) => {
             className="w-full py-2 px-3 text-white uppercase bg-transparent rounded focus:outline-none"
             type="text"
             ref={searchRef}
-            placeholder="Search for a city..."
+            placeholder={
+              searchRef.current ? searchRef.current.value : "Enter city name"
+            }
             value={searchInput}
             onChange={handleInputChange}
           />
