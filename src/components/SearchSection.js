@@ -3,12 +3,11 @@ import { CiSearch } from "react-icons/ci";
 import { BiCurrentLocation } from "react-icons/bi";
 
 const SearchSection = ({ getWeatherApi, searchRef }) => {
-  const apiKey = process.env.REACT_APP_API_KEY;
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${searchInput}&days=5&aqi=yes`;
+    const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${searchInput}&days=5&aqi=yes`;
     getWeatherApi(API_URL);
   };
 
@@ -20,7 +19,7 @@ const SearchSection = ({ getWeatherApi, searchRef }) => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${latitude},${longitude}&days=5&aqi=yes`;
+        const API_URL = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${latitude},${longitude}&days=5&aqi=yes`;
         getWeatherApi(API_URL);
       },
       () => {
